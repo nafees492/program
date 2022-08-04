@@ -1,0 +1,127 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+#include<string.h>
+typedef struct node
+{
+   
+    int data;
+    struct node* next;
+}node;
+
+
+
+
+
+void add(int d,node* head)
+{
+  node* temp=(node*)malloc(sizeof(node));
+  temp->data=d;
+  temp->next=NULL;
+node* temp1;
+temp1=head;
+while(temp1->next!=NULL)
+{
+    temp1=temp1->next;
+}
+temp1->next=temp;
+}
+
+
+void print(node* head)
+    {
+        node* t;
+        t=head;
+   
+    while (t!= NULL) {
+    printf("%d\t",t->data);
+    t = t->next;
+  }
+  printf("\n");
+    }
+    
+    
+    
+
+
+int main()
+{
+    int i=0;
+    int z=1;
+    int b=1;
+
+    int arr[50];
+    node* head=NULL;
+    node* head1=NULL;
+char s[50];
+char s1[50];
+
+scanf("%s",s);
+scanf("%s",s1);
+int l=strlen(s);
+int g=strlen(s1);
+
+int p=l-1;
+int w=s[p]-'0';
+
+node* temp=(node*)malloc(sizeof(node));
+temp->data=w;
+temp->next=NULL;
+head=temp;
+p--;
+
+while(z<l)
+{  int k=s[p]-'0';
+add(k,head);
+p--;
+z++;
+}
+//print(head);
+int h=g-1;
+int o=s[h]-'0';
+node* temp1=(node*)malloc(sizeof(node));
+temp1->data=o;
+temp1->next=NULL;
+head1=temp1;
+h--;
+
+while(b<g)
+{int v=s1[h]-'0';
+add(v,head1);
+h--;
+b++;
+}
+
+print(head1);
+node* first=head;
+node* second=head1;
+int c=0;
+int s2=0;
+node* t;
+node* res=NULL;
+node* cur=NULL;
+while(first!=NULL || second!=NULL)
+{
+    s2=c+(first?first->data:0)+(second?second->data:0);
+    c=(s2>=10)?1:0;
+    s2=s2%10;
+  node* t3=(node*)malloc(sizeof(node));
+  t3->data=s2;
+  t3->next=NULL;
+  if(res==NULL)
+  res=temp;
+  cur=temp;
+  if(first) first=first->next;
+  if(second) second=second->next;
+}
+if(c>0)
+{
+    node* t5=(node*)malloc(sizeof(node));
+    t5->data=c;
+    t5->next=NULL;
+    cur->next=temp;
+    cur=temp;
+}
+
+  print(res);  
+}
