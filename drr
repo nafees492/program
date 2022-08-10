@@ -1,0 +1,153 @@
+
+#include <stdio.h>
+
+
+
+struct Date {
+
+	int d, m, y;
+	char name[20];
+};
+
+int compare(int d,int m,int y,int d1,int m1,int y1)
+{
+        if (y < y1)
+                return 0;
+        if (y == y1 && m < m1)
+                return 0;
+        if (y == y1 && m == m1 && d < d1)
+                return 0;
+        return 1;
+}
+/*
+
+const int monthDays[12]
+	= { 31, 28, 31, 30, 31, 30,
+	31, 31, 30, 31, 30, 31 };
+
+
+int countLeapYears(Date d)
+{
+	int years = d.y;
+
+	
+	if (d.m <= 2)
+		years--;
+
+
+	return years / 4
+		- years / 100
+		+ years / 400;
+}
+
+
+int getDifference(Date dt1, Date dt2)
+{
+	
+	long int n1 = dt1.y * 365 + dt1.d;
+
+	for (int i = 0; i < dt1.m - 1; i++)
+		n1 += monthDays[i];
+
+	
+	n1 += countLeapYears(dt1);
+
+
+	long int n2 = dt2.y * 365 + dt2.d;
+	for (int i = 0; i < dt2.m - 1; i++)
+		n2 += monthDays[i];
+	n2 += countLeapYears(dt2);
+
+	return (n2 - n1);
+}
+
+*/
+int main()
+{
+
+   // Date a[20];
+   // Date k[20];
+    struct Date temp1;
+   /* int n=3;
+    char a[n];
+    for(int i=0;i<n;i++)
+    scanf("%d %d %d ",&k[i].d,&k[i].m,&k[i].y);*/
+    
+            int n = 0;
+FILE* f = fopen("./input.txt", "r");
+
+char c=fgetc(f);
+while(c!='\n')
+{
+    n=n*10;
+    n=n+(c-'0');
+    c=fgetc(f);
+}
+
+struct Date a[n];
+char temp[8];
+
+for(int i=0;i<n;i++)
+{
+    fscanf(f, "%s %s ",  temp, a[i].name);
+    
+
+    a[i].d=temp[0]-'0';
+    a[i].d=(a[i].d)*10+(temp[1]-'0');
+ 
+      a[i].m=(temp[2]-'0');
+    a[i].m=(a[i].m)*10+(temp[3]-'0');
+      a[i].y=((temp[4]-'0')*1000 )+ ((temp[5]-'0')*100)+((temp[6]-'0')*10)+(temp[7]-'0');
+
+    
+}
+
+	
+   
+   // for(int i=0;i<n;i++)
+   // {
+   //     printf("%d %d %d\n",a[i].d,a[i].m,a[i].y);
+   // }
+
+		for(int i2=0;i2<n-1;i2++)
+    {
+     	for(int j2=i2+1;j2<n;j2++)
+	{
+if(compare(a[i2].d,a[i2].m,a[i2].y,a[j2].d,a[j2].m,a[j2].y)==1)
+            {
+              temp1=a[i2];
+                a[i2]=a[j2];
+            a[j2]=temp1;
+            }
+        }
+    }
+for(int i=0;i<n;i++)
+{
+    printf("%d %d %d\n",a[i].d,a[i].m,a[i].y);
+}
+/*
+	for(int i=0;i<n-1;i++)
+	{
+	    int x=getDifference(k[i], k[i+1]);
+	    cout<<x<<endl;
+}
+/*
+for(int i=0;i<n;i++)
+        {
+            scanf("%d",&s[i].day);
+            char ch;
+         
+
+            s[i].month=getmonth(c);
+
+            scanf("%c",&ch);
+            scanf("%d",&s[i].year);
+            scanf("%c",&ch);
+
+
+	}
+	}
+	*/
+
+	return 0;
+}
